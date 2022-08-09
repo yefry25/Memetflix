@@ -27,7 +27,6 @@ router.get('/mostrar',[
 router.post('/login',[
     check('email','El campo email no puede estar vacio').not().isEmpty(),
     check('email','solo formato email').isEmail(),
-    check('email').custom(helpersUsuarios.existeEmail),
     check('password','el campo password no puede estar vacio').not().isEmpty(),
     check('password','la contraseña no puede tener menos de 8 caracteres').isLength({min:8}),
     validarCampos,
