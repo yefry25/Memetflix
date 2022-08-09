@@ -3,12 +3,10 @@ import mongoose from "mongoose";
 const PeliculaSchema = new mongoose.Schema({
     tituloOriginal: {
         type: String,
-        maxLength: 50,
         required: true
     },
     tituloEspanol: {
         type: String,
-        maxLength: 50,
         required: true
     },
     fechaLanzamiento: {
@@ -17,7 +15,6 @@ const PeliculaSchema = new mongoose.Schema({
     },
     genero: {
         type: String,
-        minLength: 5,
         required: true
     },
     calificacion: {
@@ -32,12 +29,10 @@ const PeliculaSchema = new mongoose.Schema({
     },
     director: {
         type: String,
-        maxLength: 25,
         required: true
     },
     escritor: {
         type: String,
-        maxLength: 50,
         required: true
     },
     repartoPrincipal: [
@@ -48,21 +43,19 @@ const PeliculaSchema = new mongoose.Schema({
                 required: true
             },
             personaje: { 
-                type: String, maxlength: 15 
+                type: String, required: true
             },
             rol: { 
-                type: String, maxlength: 10 
+                type: String, required: true
             },
         }
     ],
     estado: {
         type: String,
-        maxLength: 20,
         required: true
     },
     idiomaOriginal: {
         type: String,
-        maxLength: 20,
         required: true
     },
     presupuesto: {

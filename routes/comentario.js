@@ -1,24 +1,45 @@
 import {Router} from "express"
-import {comentarioPost,comentarioGet} from "../controllers/comentario.js"
+import comentario from "../controllers/comentario.js"
 import { validarCampos } from "../middlewares/middleware.js"
 import { check } from "express-validator"
-import {validarJWT} from "../middlewares/validar.js"
+import validar from "../middlewares/validar.js"
+import helpersUsuarios from "../helpers/usuario.js"
+import helpersPeliculas from "../helpers/pelicula.js"
 
 const router=new Router()
 
 router.post('/',[
-    validarJWT,
-    check('Comment','no puede estar vacio').not().isEmpty(),
-    check('Comment','debe ser menor a 6').isLength({min:6}),
-    check('idUsuario').isMongoId(),
-    check('idPelicula').isMongoId(),
+    validar.validarJWT,
+    check('Comment','El campo comentario no puede estar vacio').not().isEmpty(),
+    check('Comment','El campo comentario debe tener minimo 6 caracteres').isLength({min:6}),
+    check('idUsuario', 'No es un ID válido').isMongoId(),
+    check('idUsuario').custom(helpersUsuarios.existeUsuarioById),
+    check('idPelicula', 'No es un ID válido').isMongoId(),
+    check('idPelicula').isMongoId(helpersPeliculas.existePeliculaById),
     validarCampos
-],comentarioPost)
-
+],comentario.comentarioPost)
 
 router.get('/get',[
-    validarJWT,
+    validar.validarJWT,
+    check('idUsuario', 'No es un ID válido').isMongoId(),
+    check('idUsuario').custom(helpersUsuarios.existeUsuarioById),
+    check('idPelicula', 'No es un ID válido').isMongoId(),
+    check('idPelicula').isMongoId(helpersPeliculas.existePeliculaById),
     validarCampos
-],comentarioGet)
+],comentario.comentarioGet)
+
+router.delete('/delete',[
+    validar.validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersPeliculas.existeActor),
+    validarCampos
+],comentario.comentarioDelete)
+
+router.put('/get',[
+    validar.generarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersPeliculas.existeActor),
+    validarCampos
+],comentario.comentarioPut)
 
 export default router

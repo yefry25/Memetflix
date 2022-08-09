@@ -8,7 +8,7 @@ const ComentarioSchema = new mongoose.Schema({
     },
     idUsuario:{
         type: mongoose.Schema.ObjectId,
-        ref:"Persona",
+        ref:"Usuario",
         required: true
     },
     idPelicula:{
@@ -16,7 +16,7 @@ const ComentarioSchema = new mongoose.Schema({
         ref:"Pelicula",
         required:true
     },
-    date:{
+    createAt:{
         type:Date,
         default:Date.now
     }

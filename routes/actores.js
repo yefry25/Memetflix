@@ -1,20 +1,34 @@
-import {Router} from "express";
-import {actorespost,actoresget,actoresGetId} from "../controllers/actores.js"
+import { Router } from "express";
+import actor from "../controllers/actores.js"
 import { validarCampos } from "../middlewares/middleware.js";
 import { check } from "express-validator"
-const router= new Router()
-import {validarJWT} from "../middlewares/validar.js"
+import validar from "../middlewares/validar.js"
+import helpersUsuarios from "../helpers/usuario.js"
 
-router.post('/',[
-    validarJWT,
-    check('nombre','el campo nombre no puede estar vacio').not().isEmpty(),
-    check('biografia','el campo biografia debe ser mayor a 6').isLength({min:6}),
+const router = new Router()
+
+router.post('/', [
+    validar.validarJWT,
+    check('nombre', 'el campo nombre no puede estar vacio').not().isEmpty(),
+    check('biografia','el campo biografia no puede estar vacio').not().isEmpty(),
+    check('biografia', 'el campo biografia debe ser mayor a 8 caracteres').isLength({ min: 8 }),
     validarCampos
 ]
-,actorespost)
+,actor.actoresPost)
 
-router.get('/get',actoresget)
+router.get('/', actor.actoresGet)
 
-router.get('/ID',actoresGetId)
+router.get('/ID',[
+    check('id', 'No es un ID válido').isMongoId(),
+    check("id").custom(helpersUsuarios.existeUsuarioById),
+    validarCampos
+],actor.actoresGetId)
+
+router.put('/:id',[
+    validar.validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersUsuarios.existeUsuarioById),
+    validarCampos
+],actor.actoresPut)
 
 export default router

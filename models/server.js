@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import {dbConnection} from "../database/config.js"
-import persona from "../routes/persona.js"
+import usuario from "../routes/usuario.js"
 import comentario from "../routes/comentario.js"
 import pelicula from "../routes/pelicula.js"
 import actores from "../routes/actores.js"
@@ -18,7 +18,7 @@ class Server{
     }
 
     routes(){
-        this.app.use("/api/persona",persona)
+        this.app.use("/api/usuario",usuario)
         this.app.use("/api/comentario",comentario)
         this.app.use("/api/pelicula",pelicula)
         this.app.use("/api/actores",actores)

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const personaSchema = new mongoose.Schema({
+const usuarioSchema = new mongoose.Schema({
     email:{
       type:String,
       maxLength:25,
@@ -13,24 +13,22 @@ const personaSchema = new mongoose.Schema({
     },
     nombre:{
         type:String,
-        maxLength:20,
+        maxLength:25,
         required: true
     },
     apellido:{
         type:String,
-        maxLength:20,
+        maxLength:25,
         required: true
     },
     edad:{
         type:Number,
-        required: true,
         default:0
     },
     alias:{
         type:String,
         maxLength:8,
-        default:"anonymous"
-            
+        default:"anonymous"    
     },
     foto:{
         type:String,
@@ -46,4 +44,4 @@ const personaSchema = new mongoose.Schema({
     },
 })
 
-export default mongoose.model('Persona',personaSchema)
+export default mongoose.model('Usuario',usuarioSchema)

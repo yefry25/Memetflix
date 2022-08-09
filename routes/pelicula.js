@@ -1,79 +1,98 @@
 import {Router} from "express"
-import {peliculaPost,peliculaGet,peliculaGetId,peliculaDelate,peliculaGetNombre,peliculaActores,cargarArchivo, cargarArchivoCloud, mostrarImagenCloud} from "../controllers/pelicula.js"
+import pelicula from "../controllers/pelicula.js"
 import { validarCampos } from "../middlewares/middleware.js"
 import { check } from "express-validator"
-import {helpersPelicula,existeActor} from "../helpers/pelicula.js"
+import helpersPeliculas from "../helpers/pelicula.js"
 import validarArchivo from "../middlewares/validar-archivo.js"
-import {validarJWT} from "../middlewares/validar.js"
+import validar from "../middlewares/validar.js"
 
 const router=new Router()
 
 router.post('/',[
-    validarJWT,
-    check('tituloOriginal','el campo titulo no puede estar vacio').not().isEmpty(),
-    check('tituloOriginal','el campo titulo debe tener minimo 2 caracteres').isLength({max:50}),
+    validar.validarJWT,
+    check('tituloOriginal','el campo titulo Original no puede estar vacio').not().isEmpty(),
     check('tituloEspanol','el campo titulo en español no puede estar vacio').not().isEmpty(),
-    check('tituloEspanol','el campo titulo en español debe tener minimo 2 caracteres').isLength({max:50}),
-    check('fechaLanzamiento', 'el campo fecha no puede estar vacio').not().isEmpty(),
+    check('fechaLanzamiento', 'el campo fecha de lanzamiento no puede estar vacio').not().isEmpty(),
     check('fechaLanzamiento','el campo debe ser formato fecha').isDate(),
     check('genero','el campo genero no puede estar vacio').not().isEmpty(),
-    check('genero','el campo genero debe tener minimo 4 caracteres').isLength({min:5}),
     check('sinopsis','el campo sinopsis no puede estar vacio').not().isEmpty(),
     check('sinopsis','el campo sinopsis debe tener minimo 10 caracteres').isLength({min:10}),
     check('director','el campo director no puede estar vacio').not().isEmpty(),
-    check('director','el campo director debe tener maximo 25 caracteres').isLength({max:25}),
     check('escritor','el campo escritor no puede estar vacio').not().isEmpty(),
-    check('escritor','el campo escritor debe tener maximo 50 caracteres').isLength({max:50}),
-    check('repartoPrincipal').custom(existeActor),
+    check('repartoPrincipal').custom(helpersPeliculas.existeActor),
     check('estado','el campo estado no puede estar vacio').not().isEmpty(),
-    check('estado','el campo estado debe tener minimo 4 caracteres').isLength({max:20}),
     check('idiomaOriginal','el campo idioma original no puede estar vacio').not().isEmpty(),
-    check('idiomaOriginal','el campo idioma original debe tener minimo 4 caracteres').isLength({max:20}),
-    
+    check('presupuesto','no puede estar vacio presupuesto').not().isEmpty(),
+    check('ingresos','no puede estar vacio ingresos').not().isEmpty(),
     validarCampos
-],peliculaPost)
+],pelicula.peliculaPost)
 
-router.get('/get',[
-    
-],peliculaGet)
+router.get('/get',pelicula.peliculaGet)
 
 router.get('/ID',[
-    check('id').custom(helpersPelicula.peliculasId),
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersPeliculas.existePeliculaById),
     validarCampos
-],peliculaGetId)
+],pelicula.peliculaGetId)
 
 router.get('/Delete',[
-    validarJWT,
+    validar.validarJWT,
+    check('tituloOriginal').not().isEmpty(),
     validarCampos
-],peliculaDelate)
+],pelicula.peliculaDelete)
 
 router.get('/Nombre',[
-    
-],peliculaGetNombre)
+    check('titulo').not().isEmpty(),
+    validarCampos
+],pelicula.peliculaGetNombre)
 
-router.get('/buscar',peliculaActores)
+router.get('/actor',[
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersPeliculas.existeActor),
+    validarCampos
+],pelicula.peliculaActores)
 
 router.post('/upload/:id',[
-    validarJWT,
+    validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPelicula.peliculasId), 
+    check('id').custom(helpersPeliculas.existePeliculaById), 
     validarArchivo,
     validarCampos
-],cargarArchivo)
+],pelicula.cargarArchivo)
 
 router.post('/uploadinary/:id',[
-    validarJWT,
+    validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPelicula.peliculasId), 
+    check('id').custom(helpersPeliculas.existePeliculaById), 
     validarArchivo,
     validarCampos
-],cargarArchivoCloud)
+],pelicula.cargarArchivoCloud)
 
 router.get('/mostrarImagen/:id',[
-    validarJWT,
+    validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPelicula.peliculasId), 
+    check('id').custom(helpersPeliculas.existePeliculaById), 
     validarCampos
-],mostrarImagenCloud)
+],pelicula.mostrarImagenCloud)
+
+router.put('/modificar/:id',[
+    validar.validarJWT,
+    check('tituloOriginal','el campo titulo Original no puede estar vacio').not().isEmpty(),
+    check('tituloEspanol','el campo titulo en español no puede estar vacio').not().isEmpty(),
+    check('fechaLanzamiento', 'el campo fecha de lanzamiento no puede estar vacio').not().isEmpty(),
+    check('fechaLanzamiento','el campo debe ser formato fecha').isDate(),
+    check('genero','el campo genero no puede estar vacio').not().isEmpty(),
+    check('sinopsis','el campo sinopsis no puede estar vacio').not().isEmpty(),
+    check('sinopsis','el campo sinopsis debe tener minimo 10 caracteres').isLength({min:10}),
+    check('director','el campo director no puede estar vacio').not().isEmpty(),
+    check('escritor','el campo escritor no puede estar vacio').not().isEmpty(),
+    check('repartoPrincipal', 'No es un ID válido').isMongoId(),
+    check('repartoPrincipal').custom(helpersPeliculas.existeActor),
+    check('estado','el campo estado no puede estar vacio').not().isEmpty(),
+    check('idiomaOriginal','el campo idioma original no puede estar vacio').not().isEmpty(),
+    check('presupuesto','no puede estar vacio').not().isEmpty(),
+    check('ingresos','no puede estar vacio').not().isEmpty(),
+    validarCampos
+], pelicula.peliculaPut)
 
 export default router

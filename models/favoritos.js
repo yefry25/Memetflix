@@ -8,11 +8,10 @@ const favoritoSchema = new mongoose.Schema({
     },
     idUsuario:{
         type: mongoose.Schema.ObjectId,
-        ref:"Persona",
+        ref:"Usuario",
         required: true
     },
-    
-    date:{
+    createdAt:{
         type:Date,
         default:Date.now
     }

@@ -1,9 +1,9 @@
-import Persona from "../models/persona.js"
+import Usuario from "../models/usuario.js"
 
 
 const helpersUsuarios = {
     existeUsuarioById: async (id) => {
-        const existe = await Persona.findById(id)
+        const existe = await Usuario.findById(id)
 
         if (!existe) {
             throw new Error(`El id no existe ${id}`)
@@ -12,7 +12,7 @@ const helpersUsuarios = {
 
     existeEmail:async(email) => {
 
-        const existe = await Persona.findOne({ email });
+        const existe = await Usuario.findOne({ email });
 
         if (existe) {
             throw new Error(`El email ya esta registrado`)

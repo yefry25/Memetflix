@@ -8,12 +8,13 @@ const actoresSchema = new mongoose.Schema({
     biografia:{
         type:String,
         minLength:8,
+        required:true
     },
     foto:{
         type:String,
         default:""
     },
-    date:{
+    createdAt:{
         type:Date,
         default:Date.now
     }
