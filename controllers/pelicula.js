@@ -3,7 +3,7 @@ import subirArchivo from "../helpers/subir-archivo.js"
 import { v2 as cloudinary } from 'cloudinary'
 
 const pelicula = {
-    peliculaPost: async (req, res) => {
+    peliculaPost : async (req, res) => {
         const { tituloOriginal, tituloEspanol, fechaLanzamiento, genero, calificacion, sinopsis, director, escritor, repartoPrincipal, estado, idiomaOriginal, presupuesto, ingresos } = req.body
         try {
             const pelicula = new Pelicula({ tituloOriginal, tituloEspanol, fechaLanzamiento, genero, calificacion, sinopsis, director, escritor, repartoPrincipal, estado, idiomaOriginal, presupuesto, ingresos })
