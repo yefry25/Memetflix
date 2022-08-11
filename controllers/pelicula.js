@@ -3,7 +3,8 @@ import subirArchivo from "../helpers/subir-archivo.js"
 import { v2 as cloudinary } from 'cloudinary'
 
 const pelicula = {
-    peliculaPost : async (req, res) => {
+
+    peliculaPost: async (req, res) => {
         const { tituloOriginal, tituloEspanol, fechaLanzamiento, genero, calificacion, sinopsis, director, escritor, repartoPrincipal, estado, idiomaOriginal, presupuesto, ingresos } = req.body
         try {
             const pelicula = new Pelicula({ tituloOriginal, tituloEspanol, fechaLanzamiento, genero, calificacion, sinopsis, director, escritor, repartoPrincipal, estado, idiomaOriginal, presupuesto, ingresos })
@@ -54,7 +55,6 @@ const pelicula = {
         const { tituloOriginal } = req.body
 
         try {
-
             const pelicula = await Pelicula.findOneAndDelete({ tituloOriginal })
 
             if (!pelicula) {
@@ -189,23 +189,24 @@ const pelicula = {
             res.status(500).json({ error })
         }
     },
-    peliculaPut:  async (req, res) => {
-        const{id}=req.params
-        const{_id,createAt,...resto}=req.body;
-    
-        try{
-    
-            const modificar= await Pelicula.findByIdAndUpdate(id,resto);
-    
-            if(!modificar){
-                return res.status(500).json({msg:"No se pudo actualizar la informacion de la pelicula"})
+
+    peliculaPut: async (req, res) => {
+        const { id } = req.params
+        const { _id, createAt, ...resto } = req.body;
+
+        try {
+
+            const modificar = await Pelicula.findByIdAndUpdate(id, resto);
+
+            if (!modificar) {
+                return res.status(500).json({ msg: "No se pudo actualizar la informacion de la pelicula" })
             }
             res.json({
                 modificar
             })
-    
-        }catch(error){
-            return res.status(500).json({msg:"Hable con el WebMaster"})
+
+        } catch (error) {
+            return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
     },
 }

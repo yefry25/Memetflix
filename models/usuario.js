@@ -38,6 +38,10 @@ const usuarioSchema = new mongoose.Schema({
         type:Number,
         default:1
     },
+    rol:{
+        type:String,
+        required:true
+    },
     createdAt:{
         type:Date,
         default:Date.now

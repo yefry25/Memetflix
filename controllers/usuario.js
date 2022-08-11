@@ -20,11 +20,11 @@ const usuario = {
     },
     
     usuarioPost : async(req,res)=>{
-        const {email,password,nombre,apellido,edad,alias,foto,estado}=req.body
+        const {email,password,nombre,apellido,edad,alias,foto,estado,rol}=req.body
     
         try{
     
-            const usuario= new Usuario({email,password,nombre,apellido,edad,alias,foto,estado})
+            const usuario= new Usuario({email,password,nombre,apellido,edad,alias,foto,estado,rol})
             const salt= bcryptjs.genSaltSync(10)
             usuario.password=bcryptjs.hashSync(password, salt)
     
