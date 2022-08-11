@@ -20,7 +20,7 @@ const usuario = {
     },
     
     usuarioPost : async(req,res)=>{
-        const {email,password,nombre,apellido,edad,alias,foto,estado,rol}=req.body
+        const {email,password,nombre,apellido,edad,alias,foto,estado,rol}=req.body  /* sirve */
     
         try{
     
