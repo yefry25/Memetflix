@@ -2,6 +2,7 @@ import Usuario from "../models/usuario.js"
 import bcryptjs from "bcryptjs"
 import validar from "../middlewares/validar.js"
 import subirArchivo from "../helpers/subir-archivo.js"
+import { v2 as cloudinary } from 'cloudinary'
 
 const usuario = {
     usuarioMostrar: async (req, res) => {

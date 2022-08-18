@@ -1,4 +1,6 @@
 import Actor from "../models/actores.js"
+import subirArchivo from "../helpers/subir-archivo.js"
+import { v2 as cloudinary } from 'cloudinary'
 
 const actor = {
     actoresPost: async (req, res) => {
