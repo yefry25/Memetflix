@@ -3,6 +3,7 @@ import actor from "../controllers/actores.js"
 import { validarCampos } from "../middlewares/middleware.js";
 import { check } from "express-validator"
 import validar from "../middlewares/validar.js"
+import validarArchivo from "../middlewares/validar-archivo.js"
 import helpersUsuarios from "../helpers/usuario.js"
 import helpersPeliculas from '../helpers/pelicula.js'
 

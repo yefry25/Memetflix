@@ -4,6 +4,7 @@ import usuario from "../controllers/usuario.js"
 import { validarCampos } from "../middlewares/middleware.js"
 import helpersUsuarios from "../helpers/usuario.js"
 import validar from "../middlewares/validar.js"
+import validarArchivo from "../middlewares/validar-archivo.js"
 
 const router=new Router()
 
