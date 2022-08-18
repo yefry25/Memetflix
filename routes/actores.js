@@ -5,7 +5,7 @@ import { check } from "express-validator"
 import validar from "../middlewares/validar.js"
 import validarArchivo from "../middlewares/validar-archivo.js"
 import helpersUsuarios from "../helpers/usuario.js"
-import helpersPeliculas from '../helpers/pelicula.js'
+import helpersActor from '../helpers/actor.js'
 
 const router = new Router()
 
@@ -36,7 +36,7 @@ router.put('/:id',[
 router.post('/uploadinary/:id',[
     validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPeliculas.existeActor),
+    check('id').custom(helpersActor.existeActorById),
     validarArchivo,
     validarCampos
 ],actor.cargarArchivoCloud)
@@ -44,7 +44,7 @@ router.post('/uploadinary/:id',[
 router.get('/mostrarImagen/:id',[
     validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPeliculas.existeActor),
+    check('id').custom(helpersActor.existeActorById),
     validarCampos
 ],actor.mostrarImagenCloud)
 
