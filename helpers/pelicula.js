@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import Pelicula from "../models/pelicula.js";
 import Actor from "../models/actores.js"
 
-
 const helpersPeliculas = {
     
         existePeliculaById: async (id) => {
@@ -31,8 +30,6 @@ const helpersPeliculas = {
             }
         }
     }
-
 }
-
 
 export default helpersPeliculas

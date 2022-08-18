@@ -82,4 +82,19 @@ router.post('/upload/:id',[
     validarCampos
 ],usuario.cargarImagen)
 
+router.post('/uploadinary/:id',[
+    validar.validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersUsuarios.existeUsuarioById),
+    validarArchivo,
+    validarCampos
+],usuario.cargarArchivoCloud)
+
+router.get('/mostrarImagen/:id',[
+    validar.validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersUsuarios.existeUsuarioById),
+    validarCampos
+],usuario.mostrarImagenCloud)
+
 export default router
