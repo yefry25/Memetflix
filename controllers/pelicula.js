@@ -209,6 +209,7 @@ const pelicula = {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
     },
+
 }
 
 export default pelicula

@@ -21,7 +21,7 @@ const favorito = {
     favoritoGet: async (req, res) => {
         try {
             const favorito = await Favorito.find()
-                .populate("idPelicula", ["tituloOriginal", "tituloEspañol","foto","sinopsis"])
+                .populate("idPelicula", ["tituloOriginal", "tituloEspanol","foto","sinopsis"])
                 .populate("idUsuario", ["nombre", "apellido"])
 
             if(!favorito){
