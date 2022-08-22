@@ -20,7 +20,6 @@ const PeliculaSchema = new mongoose.Schema({
     calificacion: {
         type: Number,
         default: 0,
-
     },
     sinopsis: {
         type: String,
@@ -67,6 +66,10 @@ const PeliculaSchema = new mongoose.Schema({
         default: 0
     },
     foto: {
+        type: String,
+        default: ""
+    },
+    poster: {
         type: String,
         default: ""
     },

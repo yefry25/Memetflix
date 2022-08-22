@@ -29,4 +29,3 @@ router.delete('/delete',[
 ],favorito.favoritoDelete)
 
 export default router
-

@@ -51,18 +51,14 @@ const actor = {
     actoresPut: async (req, res) => {
         const { id } = req.params
         const { _id, createAt, ...resto } = req.body;
-
         try {
-
             const modificar = await Actor.findByIdAndUpdate(id, resto);
-
             if (!modificar) {
                 return res.status(500).json({ msg: "No se pudo actualizar la informacion del actor" })
             }
             res.json({
                 modificar
             })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }

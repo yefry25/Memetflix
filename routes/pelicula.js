@@ -68,6 +68,14 @@ router.post('/uploadinary/:id',[
     validarCampos
 ],pelicula.cargarArchivoCloud)
 
+router.post('/uploadinary/poster/:id',[
+    validar.validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersPeliculas.existePeliculaById), 
+    validarArchivo,
+    validarCampos
+],pelicula.cargarArchivoCloudPoster)
+
 router.get('/mostrarImagen/:id',[
     validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),

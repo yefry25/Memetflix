@@ -42,7 +42,6 @@ const usuario = {
     },
     usuarioLogin: async (req, res) => {
         const { email, password } = req.body;
-
         try {
             const usuario = await Usuario.findOne({ email })
             if (!usuario) {
@@ -50,20 +49,17 @@ const usuario = {
                     msg: "Usuario / Password no son correctos"
                 })
             }
-
             const validPassword = bcryptjs.compareSync(password, usuario.password);
             if (!validPassword) {
                 return res.status(400).json({
                     msg: "Usuario / Password no son correctos"
                 })
             }
-
             const token = await validar.generarJWT(usuario.id);
             res.json({
                 usuario,
                 token
             })
-
         } catch (error) {
             return res.status(500).json({
                 msg: "Hable con el WebMaster"
