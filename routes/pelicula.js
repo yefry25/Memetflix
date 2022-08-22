@@ -99,7 +99,7 @@ router.put('/modificar/:id',[
     check('estado','el campo estado no puede estar vacio').not().isEmpty(),
     check('idiomaOriginal','el campo idioma original no puede estar vacio').not().isEmpty(),
     check('presupuesto','no puede estar vacio').not().isEmpty(),
-    check('ingresos','no puede estar vacio').not().isEmpty(),
+    check('ingresos','el campo ingresos no puede estar vacio').not().isEmpty(),
     validarCampos
 ], pelicula.peliculaPut)
 
