@@ -19,6 +19,7 @@ router.post('/',[
     check('apellido','el campo apellido no puede estar vacio').not().isEmpty(),
     check('apellido','el campo apellido no puede sobrepasar de los 20 caracteres').isLength({max:20}),
     check('rol','El campo rol es requerido').not().isEmpty(),
+    check('descripcion','el campo descripcion no puede estar vacio').not().isEmpty(),
     validarCampos
 ], usuario.usuarioPost)
 

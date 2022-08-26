@@ -42,6 +42,10 @@ const usuarioSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    descripcion:{
+        type:String,
+        required:true
+    },
     createdAt:{
         type:Date,
         default:Date.now
