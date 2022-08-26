@@ -93,7 +93,7 @@ router.post('/uploadinary/:id',[
 
 router.get('/mostrarImagen/:id',[
     validar.validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'No es un id válido').isMongoId(),
     check('id').custom(helpersUsuarios.existeUsuarioById),
     validarCampos
 ],usuario.mostrarImagenCloud)
