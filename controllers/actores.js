@@ -5,16 +5,13 @@ import { v2 as cloudinary } from 'cloudinary'
 const actor = {
     actoresPost: async (req, res) => {
         const { nombre, biografia, foto } = req.body
-
         try {
             const actores = new Actor({ nombre, biografia, foto })
-
             if (!actores) {
                 return res.status(400).json({ msg: "No se pudo registrar el actor" })
             }
             actores.save()
             res.json({ actores })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
@@ -23,12 +20,10 @@ const actor = {
     actoresGet: async (req, res) => {
         try {
             const actores = await Actor.find();
-
             if (!actores) {
                 return res.status(400).json({ msg: "No se encontro los actores buscados" })
             }
             res.json({ actores })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
@@ -42,7 +37,6 @@ const actor = {
                 return res.status(400).json({ msg: "No se encontro lo buscado" })
             }
             res.json({ actores })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }

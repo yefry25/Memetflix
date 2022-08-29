@@ -93,17 +93,14 @@ const pelicula = {
 
     peliculaActores: async (req, res) => {
         const { id } = req.body;
-
         try {
             const peliculas = await Pelicula.find().where('repartoPrincipal.act').in(id).exec();
-
             if (!peliculas) {
                 return res.status(400).json({ msg: "No se encontro la pelicula por el actor buscado" })
             }
             res.json({
                 peliculas
             })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }

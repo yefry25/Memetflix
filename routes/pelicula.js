@@ -85,21 +85,7 @@ router.get('/mostrarImagen/:id',[
 
 router.put('/modificar/:id',[
     validar.validarJWT,
-    check('tituloOriginal','el campo titulo Original no puede estar vacio').not().isEmpty(),
-    check('tituloEspanol','el campo titulo en español no puede estar vacio').not().isEmpty(),
-    check('fechaLanzamiento', 'el campo fecha de lanzamiento no puede estar vacio').not().isEmpty(),
-    check('fechaLanzamiento','el campo debe ser formato fecha').isDate(),
-    check('genero','el campo genero no puede estar vacio').not().isEmpty(),
-    check('sinopsis','el campo sinopsis no puede estar vacio').not().isEmpty(),
-    check('sinopsis','el campo sinopsis debe tener minimo 10 caracteres').isLength({min:10}),
-    check('director','el campo director no puede estar vacio').not().isEmpty(),
-    check('escritor','el campo escritor no puede estar vacio').not().isEmpty(),
-    check('repartoPrincipal', 'No es un ID válido').isMongoId(),
-    check('repartoPrincipal').custom(helpersPeliculas.existeActor),
-    check('estado','el campo estado no puede estar vacio').not().isEmpty(),
-    check('idiomaOriginal','el campo idioma original no puede estar vacio').not().isEmpty(),
-    check('presupuesto','presupuesto no puede estar vacio').not().isEmpty(),
-    check('ingresos','el campo ingresos no puede estar vacio').not().isEmpty(),
+    check('id').custom(helpersPeliculas.existePeliculaById), 
     validarCampos
 ], pelicula.peliculaPut)
 
