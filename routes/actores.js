@@ -20,7 +20,7 @@ router.post('/', [
 
 router.get('/', actor.actoresGet)
 
-router.get('/ID',[
+router.post('/id',[
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom(helpersActor.existeActorById),
     validarCampos
