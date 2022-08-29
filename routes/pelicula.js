@@ -48,7 +48,7 @@ router.get('/Nombre',[
 
 router.post('/actor',[
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersPeliculas.existeActor),
+    check('id').custom(helpersPeliculas.existeActorById),
     validarCampos
 ],pelicula.peliculaActores)
 
