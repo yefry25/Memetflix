@@ -46,7 +46,7 @@ router.get('/Nombre',[
     validarCampos
 ],pelicula.peliculaGetNombre)
 
-router.get('/actor',[
+router.post('/actor',[
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom(helpersPeliculas.existeActor),
     validarCampos

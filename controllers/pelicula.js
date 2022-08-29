@@ -68,7 +68,6 @@ const pelicula = {
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
-
     },
 
     peliculaGetNombre: async (req, res) => {
