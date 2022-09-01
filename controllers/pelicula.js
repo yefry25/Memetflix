@@ -224,9 +224,7 @@ const pelicula = {
     peliculaPut: async (req, res) => {
         const { id } = req.params
         const { _id, createAt, ...resto } = req.body;
-
         try {
-
             const modificar = await Pelicula.findByIdAndUpdate(id, resto);
 
             if (!modificar) {

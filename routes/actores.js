@@ -29,7 +29,7 @@ router.post('/id',[
 router.put('/:id',[
     validar.validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersUsuarios.existeUsuarioById),
+    check('id').custom(helpersActor.existeActorById),
     validarCampos
 ],actor.actoresPut)
 
