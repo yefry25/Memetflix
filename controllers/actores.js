@@ -105,6 +105,21 @@ const actor = {
             res.status(500).json({ error })
         }
     },
+    actorDelete: async (req, res) => {
+        const { id } = req.params
+        try {
+            const actor = await Actor.findByIdAndDelete(id)
+            if (!actor) {
+                return res.status(400).json({ msg: "No se pudo eliminar el actor" })
+            }
+            res.json({
+                pelicula,
+                msg: "acaba de eliminar el actor"
+            })
+        } catch (error) {
+            return res.status(500).json({ msg: "Hable con el WebMaster" })
+        }
+    },
 }
 
 export default actor

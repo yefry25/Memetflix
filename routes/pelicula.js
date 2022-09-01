@@ -35,9 +35,10 @@ router.get('/ID',[
     validarCampos
 ],pelicula.peliculaGetId)
 
-router.get('/Delete',[
+router.delete('/delete/:id',[
     validar.validarJWT,
-    check('tituloOriginal').not().isEmpty(),
+    check('id').not().isEmpty(),
+    check('id').custom(helpersPeliculas.existePeliculaById),
     validarCampos
 ],pelicula.peliculaDelete)
 

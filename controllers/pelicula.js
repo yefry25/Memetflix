@@ -52,11 +52,9 @@ const pelicula = {
     },
 
     peliculaDelete: async (req, res) => {
-        const { tituloOriginal } = req.body
-
+        const { id } = req.params
         try {
-            const pelicula = await Pelicula.findOneAndDelete({ tituloOriginal })
-
+            const pelicula = await Pelicula.findByIdAndDelete(id)
             if (!pelicula) {
                 return res.status(400).json({ msg: "No se pudo eliminar la pelicula" })
             }
@@ -64,7 +62,6 @@ const pelicula = {
                 pelicula,
                 msg: "acaba de eliminar la pelicula"
             })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
