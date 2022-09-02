@@ -53,6 +53,7 @@ const usuario = {
             if (!validPassword) {
                 return res.status(400).json({
                     msg: "Usuario / Password no son correctos"
+                    
                 })
             }
             const token = await validar.generarJWT(usuario.id);
