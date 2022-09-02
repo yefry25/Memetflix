@@ -14,6 +14,8 @@ router.post('/', [
     check('nombre', 'el campo nombre no puede estar vacio').not().isEmpty(),
     check('biografia','el campo biografia no puede estar vacio').not().isEmpty(),
     check('biografia', 'el campo biografia debe ser mayor a 8 caracteres').isLength({ min: 8 }),
+
+    
     validarCampos
 ]
 ,actor.actoresPost)
