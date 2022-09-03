@@ -43,6 +43,7 @@ class Server{
     escuchar(){
         this.app.listen(this.port,()=>{
             console.log(`servidor escuchando en el puerto ${this.port}`);
+            
         })
     }
 }
