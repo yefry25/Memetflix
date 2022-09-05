@@ -84,7 +84,7 @@ router.get('/mostrarImagen/:id',[
     validarCampos
 ],pelicula.mostrarImagenCloud)
 
-router.post('/modificar/:id',[
+router.put('/modificar/:id',[
     validar.validarJWT,
     check('id').custom(helpersPeliculas.existePeliculaById), 
     validarCampos

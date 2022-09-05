@@ -1,59 +1,87 @@
 import { Router } from "express";
-import actor from "../controllers/actores.js"
+import actor from "../controllers/actores.js";
 import { validarCampos } from "../middlewares/middleware.js";
-import { check } from "express-validator"
-import validar from "../middlewares/validar.js"
-import validarArchivo from "../middlewares/validar-archivo.js"
-import helpersUsuarios from "../helpers/usuario.js"
-import helpersActor from '../helpers/actor.js'
+import { check } from "express-validator";
+import validar from "../middlewares/validar.js";
+import validarArchivo from "../middlewares/validar-archivo.js";
+import helpersUsuarios from "../helpers/usuario.js";
+import helpersActor from "../helpers/actor.js";
 
-const router = new Router()
+const router = new Router();
 
-router.post('/', [
+router.post(
+  "/",
+  [
     validar.validarJWT,
-    check('nombre', 'el campo nombre no puede estar vacio').not().isEmpty(),
-    check('biografia','el campo biografia no puede estar vacio').not().isEmpty(),
-    check('biografia', 'el campo biografia debe ser mayor a 8 caracteres').isLength({ min: 8 }),
-    validarCampos
-]
-,actor.actoresPost)
+    check("nombre", "el campo nombre no puede estar vacio").not().isEmpty(),
+    check("biografia", "el campo biografia no puede estar vacio")
+      .not()
+      .isEmpty(),
+    check(
+      "biografia",
+      "el campo biografia debe ser mayor a 8 caracteres"
+    ).isLength({ min: 8 }),
+    validarCampos,
+  ],
+  actor.actoresPost
+);
 
-router.get('/', actor.actoresGet)
+router.get("/", actor.actoresGet);
 
-router.post('/id',[
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersActor.existeActorById),
-    validarCampos
-],actor.actoresGetId)
+router.post(
+  "/id",
+  [
+    check("id", "No es un ID válido").isMongoId(),
+    check("id").custom(helpersActor.existeActorById),
+    validarCampos,
+  ],
+  actor.actoresGetId
+);
 
-router.put('/:id',[
+router.put(
+  "/:id",
+  [
     validar.validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersActor.existeActorById),
+    check("id", "No es un ID válido").isMongoId(),
+    check("id").custom(helpersActor.existeActorById),
 
-    validarCampos
-],actor.actoresPut)
+    validarCampos,
+  ],
+  actor.actoresPut
+);
 
-router.post('/uploadinary/:id',[
+router.post(
+  "/uploadinary/:id",
+  [
     validar.validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersActor.existeActorById),
+    check("id", "No es un ID válido").isMongoId(),
+    check("id").custom(helpersActor.existeActorById),
     validarArchivo,
-    validarCampos
-],actor.cargarArchivoCloud)
+    validarCampos,
+  ],
+  actor.cargarArchivoCloud
+);
 
-router.get('/mostrarImagen/:id',[
+router.get(
+  "/mostrarImagen/:id",
+  [
     validar.validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom(helpersActor.existeActorById),
-    validarCampos
-],actor.mostrarImagenCloud)
+    check("id", "No es un ID válido").isMongoId(),
+    check("id").custom(helpersActor.existeActorById),
+    validarCampos,
+  ],
+  actor.mostrarImagenCloud
+);
 
-router.post('/delete/:id',[
-    validar.validarJWT,
-    check('id').not().isEmpty(),
-    check('id').custom(helpersActor.existeActorById),
-    validarCampos
-],actor.actorDelete)
+router.post(
+  "/delete/:id",
+  [
+    /* validar.validarJWT, */
+    check("id").not().isEmpty(),
+    check("id").custom(helpersActor.existeActorById),
+    validarCampos,
+  ],
+  actor.actorDelete
+);
 
-export default router
+export default router;
