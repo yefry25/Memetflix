@@ -51,7 +51,7 @@ router.get('/mostrarImagen/:id',[
     validarCampos
 ],actor.mostrarImagenCloud)
 
-router.delete('/delete/:id',[
+router.post('/delete/:id',[
     validar.validarJWT,
     check('id').not().isEmpty(),
     check('id').custom(helpersActor.existeActorById),
