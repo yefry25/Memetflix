@@ -56,6 +56,6 @@ router.post('/delete/:id',[
     check('id').not().isEmpty(),
     check('id').custom(helpersActor.existeActorById),
     validarCampos
-],pelicula.peliculaDelete)
+],actor.actorDelete)
 
 export default router
