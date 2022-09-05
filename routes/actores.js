@@ -76,7 +76,7 @@ router.get(
 router.post(
   "/delete/:id",
   [
-    /* validar.validarJWT, */
+    validar.validarJWT,
     check("id").not().isEmpty(),
     check("id").custom(helpersActor.existeActorById),
     validarCampos,
