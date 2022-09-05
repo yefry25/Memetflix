@@ -27,29 +27,24 @@ const validar = {
                 msg: "No hay token en la peticion"
             })
         }
-    
         try {
             const { uid } = jwt.verify(token, process.env.CLAVESECRET)
-    
             let usuario = await Usuario.findById(uid);
-    
             if (!usuario) {
                 return res.status(401).json({
                     msg: "Token no válido "//- usuario no existe DB
                 })
             }
-            
             if (usuario.estado == 0) {
                 return res.status(401).json({
                     msg: "Token no válido " //- usuario con estado: false
                 })
             }
-    
             req.usuario=usuario
             next();
     
         } catch (error) {
-            res.status(401).json({
+            res.status(501).json({
                 msg: "Token no valido"
             })
         }
