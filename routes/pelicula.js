@@ -35,7 +35,7 @@ router.get('/ID',[
     validarCampos
 ],pelicula.peliculaGetId)
 
-router.delete('/delete/:id',[
+router.post('/delete/:id',[
     validar.validarJWT,
     check('id').not().isEmpty(),
     check('id').custom(helpersPeliculas.existePeliculaById),
@@ -84,7 +84,7 @@ router.get('/mostrarImagen/:id',[
     validarCampos
 ],pelicula.mostrarImagenCloud)
 
-router.put('/modificar/:id',[
+router.post('/modificar/:id',[
     validar.validarJWT,
     check('id').custom(helpersPeliculas.existePeliculaById), 
     validarCampos

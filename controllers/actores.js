@@ -113,7 +113,7 @@ const actor = {
                 return res.status(400).json({ msg: "No se pudo eliminar el actor" })
             }
             res.json({
-                pelicula,
+                actor,
                 msg: "acaba de eliminar el actor"
             })
         } catch (error) {
