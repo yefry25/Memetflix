@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const usuarioSchema = new mongoose.Schema({
-    email:{
+    email:{  
       type:String,
       maxLength:25,
       required: true 

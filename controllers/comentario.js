@@ -21,6 +21,7 @@ const comentario = {
 
     comentarioGet: async (req, res) => {
         const { idPelicula, idUsuario } = req.body
+        console.log(idPelicula);
 
         try {
             const comentario = await Comentario.find({ idPelicula, idUsuario })

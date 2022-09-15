@@ -183,7 +183,6 @@ const usuario = {
             res.status(400).json({ error, 'general': 'Controlador' })
         }
     },
-
     cargarArchivoCloud: async (req, res) => {
         cloudinary.config({
             cloud_name: process.env.CLOUDINARY_NAME,
@@ -218,7 +217,6 @@ const usuario = {
             res.status(400).json({ error, 'general': 'Controlador' })
         }
     },
-
     mostrarImagenCloud: async (req, res) => {
         const { id } = req.params
 
