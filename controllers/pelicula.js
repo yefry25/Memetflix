@@ -73,7 +73,7 @@ const pelicula = {
             const pelicula = await Pelicula.find({
                 $or: [
                     { tituloOriginal: new RegExp(titulo, "i") },
-                    { tituloEspañol: new RegExp(titulo, "i") }
+                    { tituloEspanol: new RegExp(titulo, "i") }
                 ]
             });
 

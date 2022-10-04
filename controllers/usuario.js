@@ -87,18 +87,14 @@ const usuario = {
     usuarioPut: async (req, res) => {
         const { id } = req.params
         const { _id, createAt, estado, ...resto } = req.body;
-
         try {
-
             const modificar = await Usuario.findByIdAndUpdate(id, resto);
-
             if (!modificar) {
                 return res.status(500).json({ msg: "No se pudo actualizar la informacion del usuario" })
             }
             res.json({
                 modificar
             })
-
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }

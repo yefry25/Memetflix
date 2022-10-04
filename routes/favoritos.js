@@ -5,6 +5,7 @@ import { validarCampos } from "../middlewares/middleware.js"
 import validar from "../middlewares/validar.js"
 import helpersUsuarios from "../helpers/usuario.js"
 import helpersPeliculas from "../helpers/pelicula.js"
+import helperFavorito from "../helpers/favorito.js"
 
 const router=new Router()
 
@@ -12,6 +13,7 @@ router.post('/',[
     validar.validarJWT,
     check('idPelicula', 'No es un ID válido').isMongoId(),
     check('idPelicula').custom(helpersPeliculas.existePeliculaById),
+    check('idPelicula').custom(helperFavorito.favoritoRepetido),
     check('idUsuario', 'No es un ID válido').isMongoId(),
     check('idUsuario').custom(helpersUsuarios.existeUsuarioById),
     validarCampos

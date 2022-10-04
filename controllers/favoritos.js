@@ -3,7 +3,6 @@ import Favorito from "../models/favoritos.js"
 const favorito = {
     favoritoPost: async (req, res) => {
         const { idPelicula, idUsuario } = req.body
-
         try {
             const favorito = new Favorito({ idPelicula, idUsuario })
 
@@ -11,8 +10,7 @@ const favorito = {
                 return res.status(400).json({ msg: "No se puedo registrar tu pelicula favorita" })
             }
             favorito.save()
-            res.json({ favorito })
-
+            res.json({ favorito } )
         } catch (error) {
             return res.status(500).json({ msg: "Hable con el WebMaster" })
         }
